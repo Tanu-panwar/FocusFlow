@@ -43,6 +43,11 @@ app.use("/api/note", noteRouter)
 //habit
 app.use('/api/habits', require('./routes/habit'));
 
+app.use((req, res, next) => {
+  console.log(res.getHeaders()); // This will print the headers
+  next();
+});
+
 // error handling
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500
