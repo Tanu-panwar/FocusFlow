@@ -33,7 +33,7 @@ export default function Main({ darkMode, tasks, setTasks, searchQuery }) {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/tasks", {
+                const response = await axios.get("https://focusflowbackend.onrender.com/api/tasks", {
                     withCredentials: true
                 });
                 setTasks(response.data);
@@ -87,7 +87,7 @@ export default function Main({ darkMode, tasks, setTasks, searchQuery }) {
             setTimeLeft((prevTime) => {
                 if (prevTime <= 1) {
                     clearInterval(breakTimerRef.current);
-                    axios.put(`http://localhost:3000/api/tasks/${taskStarted}`, {
+                    axios.put(`https://focusflowbackend.onrender.com/api/tasks/${taskStarted}`, {
                         breakTime: minutes * 60,
                         taskDuration: Math.floor((Date.now() - taskStartTime) / 1000)  
                     }, {
