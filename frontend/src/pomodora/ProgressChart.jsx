@@ -29,7 +29,7 @@ export default function ProgressChart({ onClose }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/tasks", {
+                const response = await axios.get("https://focusflowbackend.onrender.com/api/tasks", {
                     withCredentials: true
                 });
 

@@ -36,7 +36,7 @@ const Note = () => {
     if (!userToken) return;
 
     try {
-      const res = await axios.get("http://localhost:3000/api/note/all", {
+      const res = await axios.get("https://focusflowbackend.onrender.com/api/note/all", {
         headers: { Authorization: `Bearer ${userToken}` },
         withCredentials: true,
       });
@@ -60,7 +60,7 @@ const Note = () => {
 
     try {
       const res = await axios.delete(
-        `http://localhost:3000/api/note/delete/${data._id}`,
+        `https://focusflowbackend.onrender.com/api/note/delete/${data._id}`,
         {
           headers: { Authorization: `Bearer ${userToken}` },
           withCredentials: true,
@@ -83,7 +83,7 @@ const Note = () => {
     const userToken = localStorage.getItem("token");
 
     try {
-      const res = await axios.get("http://localhost:3000/api/note/search", {
+      const res = await axios.get("https://focusflowbackend.onrender.com/api/note/search", {
         params: { query },
         headers: { Authorization: `Bearer ${userToken}` },
         withCredentials: true,
@@ -111,7 +111,7 @@ const Note = () => {
 
     try {
       const res = await axios.put(
-        `http://localhost:3000/api/note/update-note-pinned/${noteData._id}`,
+        `https://focusflowbackend.onrender.com/api/note/update-note-pinned/${noteData._id}`,
         { isPinned: !noteData.isPinned },
         {
           headers: { Authorization: `Bearer ${userToken}` },

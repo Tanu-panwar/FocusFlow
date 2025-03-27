@@ -36,7 +36,7 @@ export default function Card({
         setTimeLeft(customTime * 60);
 
         try {
-            await axios.put(`http://localhost:3000/api/tasks/${taskId}`, {
+            await axios.put(`https://focusflowbackend.onrender.com/api/tasks/${taskId}`, {
                 status: "Doing",
                 taskStartTime: startTime
             },{
@@ -66,7 +66,7 @@ export default function Card({
         setElapsedTime(formatTime(totalTaskTimeSpent));
 
         try {
-            await axios.put(`http://localhost:3000/api/tasks/${taskId}`, {
+            await axios.put(`https://focusflowbackend.onrender.com/api/tasks/${taskId}`, {
                 status: "Done",
                 taskDuration: totalTaskTimeSpent
             }
@@ -91,7 +91,7 @@ export default function Card({
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://localhost:3000/api/tasks/${taskId}`, {
+            await axios.delete(`https://focusflowbackend.onrender.com/api/tasks/${taskId}`, {
                 withCredentials: true
             });
 

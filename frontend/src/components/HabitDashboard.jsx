@@ -12,7 +12,7 @@ const HabitDashboard = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) setUser(storedUser);
 
-    axios.get("http://localhost:3000/api/habits", {
+    axios.get("https://focusflowbackend.onrender.com/api/habits", {
         withCredentials: true,
       })
       .then((response) => {

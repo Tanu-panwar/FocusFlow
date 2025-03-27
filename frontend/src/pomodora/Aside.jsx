@@ -18,7 +18,7 @@ function Aside({ setDarkMode, darkMode, tasks, setTasks }) {
         
         async function fetchTasks() {
             try {
-                const response = await axios.get("http://localhost:3000/api/tasks", {
+                const response = await axios.get("https://focusflowbackend.onrender.com/api/tasks", {
                     withCredentials: true
                 });
         
@@ -46,13 +46,13 @@ function Aside({ setDarkMode, darkMode, tasks, setTasks }) {
     
         try {
             // Add new task
-            await axios.post("http://localhost:3000/api/tasks", newTask, {
+            await axios.post("https://focusflowbackend.onrender.com/api/tasks", newTask, {
                 
                 withCredentials: true // Ensure credentials (cookies) are sent
             });
     
             // Fetch updated tasks
-            const response = await axios.get("http://localhost:3000/api/tasks", {
+            const response = await axios.get("https://focusflowbackend.onrender.com/api/tasks", {
                 
                 withCredentials: true
             });

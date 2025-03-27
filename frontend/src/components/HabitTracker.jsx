@@ -19,7 +19,7 @@ const HabitTracker = ({ user, habits, weeklyDate}) => {
     const habitContent = document.getElementById("habit").value;
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/habits/create",
+        "https://focusflowbackend.onrender.com/api/habits/create",
         { content: habitContent },
         { withCredentials: true } 
       );
@@ -39,7 +39,7 @@ const HabitTracker = ({ user, habits, weeklyDate}) => {
 
   const handleStatusUpdate = async (habitId, date) => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/habits/status-update?id=${habitId}&date=${date}`, { withCredentials: true });
+      const response = await axios.get(`https://focusflowbackend.onrender.com/api/habits/status-update?id=${habitId}&date=${date}`, { withCredentials: true });
       if (response.status === 200) {
         window.location.reload(); // Refresh state after update
       }
@@ -50,7 +50,7 @@ const HabitTracker = ({ user, habits, weeklyDate}) => {
 
   const handleFavoriteToggle = async (habitId) => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/habits/favorite-habit?id=${habitId}`, { withCredentials: true });
+      const response = await axios.get(`https://focusflowbackend.onrender.com/api/habits/favorite-habit?id=${habitId}`, { withCredentials: true });
       if (response.status === 200) {
         window.location.reload(); // Refresh state after update
       }
@@ -61,7 +61,7 @@ const HabitTracker = ({ user, habits, weeklyDate}) => {
 
   const handleDeleteHabit = async (habitId) => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/habits/remove?id=${habitId}`, { withCredentials: true });
+      const response = await axios.get(`https://focusflowbackend.onrender.com/api/habits/remove?id=${habitId}`, { withCredentials: true });
       if (response.status === 200) {
         window.location.reload(); // Refresh state after update
       }
