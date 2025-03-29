@@ -1,0 +1,87 @@
+@import "tailwindcss";
+/* Start Global For Dark Mode */
+header.dark_mode {
+    background-color: #444 !important;
+}
+header.light_mode {
+    background-color: #f8fafc !important;
+}
+.main_content {
+    min-height: 100vh;
+    width: 100%;
+    margin: 0 !important;
+} 
+.main_content.dark {
+    background-color: rgb(39 39 42) !important;
+}
+.main_content {
+    background-color: rgb(228, 228, 228) !important;
+}
+
+.wrongInputs {
+    border: 2px solid #c92e26 !important;
+}
+
+.taskStarted {
+    border: 1.5px solid rgb(53, 156, 53);
+}
+
+.active {
+    background-color:#f23064 !important;
+    color: white !important;
+}
+.active:hover {
+    background-color:#f43064 !important;
+} 
+
+
+
+/* .dark_mode {
+    background-color: oklch(0.257 0.09 281.288) !important;
+    color: white !important;
+} */
+
+/* Light Mode Styles */
+/* .light_mode {
+    background-color: white !important;
+    color: black !important;
+} */
+
+/* Main Content Styling */
+/* .main_content {
+    min-height: 100vh;
+    width: 100%;
+    margin: 0 !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.main_content.dark {
+    background-color: oklch(0.257 0.09 281.288) !important;
+    color: white !important;
+}
+
+.main_content.light {
+    background-color: white !important;
+    color: black !important;
+}
+
+/* Input Field Styling */
+/* .wrongInputs {
+    border: 2px solid #c92e26 !important;
+} */
+
+/* Task Styling */
+/* .taskStarted {
+    border: 1.5px solid rgb(53, 156, 53);
+} */
+
+/* Active State Styling */
+/* .active {
+    background-color: rgb(14 165 233) !important;
+    color: white !important;
+} */
+
+/* .active:hover {
+    background-color: rgb(2 132 199) !important;
+} */ 
+
