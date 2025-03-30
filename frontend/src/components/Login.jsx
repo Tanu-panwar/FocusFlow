@@ -30,8 +30,13 @@ function Login() {
     });
 
   const handleSubmit = async (e) => {
+    console.log("Login button clicked!");
     e.preventDefault();
+
     try {
+      console.log("Sending request to:", `${server.prod}/login`);
+      console.log("Request Data:", inputValue);
+
       const { data } = await axios.post(
         `${server.prod}/login`,
         {
@@ -39,7 +44,7 @@ function Login() {
         },
         { withCredentials: true }
       );
-      console.log(data);
+      console.log("Server Response:",data);
       const { success, message, token, user} = data;
 
       if (success) {
@@ -55,7 +60,13 @@ function Login() {
       }
     } 
     catch (error) {
-      console.log(error);
+      console.error("Login Error:", error);
+      if (error.response) {
+        console.error("Server Response Error:", error.response.data);
+        handleError(error.response.data.message || "Login failed!");
+      } else {
+        handleError("Something went wrong!");
+      }
     }
     setInputValue({
       ...inputValue,
