@@ -10,7 +10,7 @@ dotenv.config();
 
 app.use(
   cors({
-    origin:"https://focusflow-9cy2.onrender.com",
+    origin:"http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
