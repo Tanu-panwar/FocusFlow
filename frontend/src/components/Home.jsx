@@ -170,6 +170,40 @@ function Home() {
         </div>
       </section>
 
+      <div className="border-t-1 border-[#f23064] my-5 mx-5 shadow-lg"></div>
+
+      {/* Flashcards Section */}
+      <section className="bg-light px-5 overflow-hidden relative min-h-[70vh] flex items-center">
+        <div className="container grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="order-1 flex justify-center items-center">
+            <motion.img
+              initial={{ x: -50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              src={banner}
+              alt="Flashcards Illustration"
+              className="w-[300px] md:w-[400px] lg:w-[500px] drop-shadow"
+            />
+          </div>
+
+          <div className="order-2 flex flex-col justify-center text-center md:text-left space-y-6 lg:max-w-[400px]">
+            <motion.h1 variants={FadeUp(0.6)} initial="initial" animate="animate" className="text-3xl text-white lg:text-5xl font-bold !leading-snug">
+              Enhance Learning with <span className="text-[#f23064]">Flashcards</span>!
+            </motion.h1>
+            <motion.p variants={FadeUp(0.8)} initial="initial" animate="animate" className="text-gray-300">
+              Memorize efficiently using interactive flashcards. Reinforce concepts and boost retention with an engaging learning experience.
+            </motion.p>
+            <motion.div variants={FadeUp(1.0)} initial="initial" animate="animate" className="flex justify-center md:justify-start">
+              <Link to="/flashcards" className="primary-btn bg-[#f23064] text-white rounded-xl px-5 py-3 flex items-center gap-2 group">
+                Get Started
+                <IoIosArrowRoundForward className="text-xl group-hover:translate-x-2 group-hover:-rotate-45 duration-300" />
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+
       <ToastContainer />
     </div>
   );
