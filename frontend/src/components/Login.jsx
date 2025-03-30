@@ -34,6 +34,7 @@ function Login() {
     e.preventDefault();
 
     try {
+      console.log("server.prod Value:", server.prod);
       console.log("Sending request to:", `${server.prod}/login`);
       console.log("Request Data:", inputValue);
 
