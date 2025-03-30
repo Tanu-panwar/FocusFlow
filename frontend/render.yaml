@@ -1,7 +1,0 @@
-version: 1
-buildCommand: npm run build
-staticPublishPath: ./dist
-routes:
-  - src: /.*
-    dest: /index.html
-    status: 200
