@@ -1,6 +1,7 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import server from "../environment";
 import HabitTracker from "./HabitTracker";
 
 const HabitDashboard = () => {
@@ -12,7 +13,7 @@ const HabitDashboard = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) setUser(storedUser);
 
-    axios.get("https://focusflowbackend.onrender.com/api/habits", {
+    axios.get(`${server.prod}/api/habits`, {
         withCredentials: true,
       })
       .then((response) => {

@@ -1,6 +1,7 @@
 
 import axios from "axios";
 import { useState } from "react";
+import server from "../environment";
 
 export default function TextSummarize() {
   const [text, setText] = useState("");
@@ -15,7 +16,7 @@ export default function TextSummarize() {
     setSummary("");
 
     try {
-      const response = await axios.post("http://localhost:3000/api/summarize", { text });
+      const response = await axios.post(`${server.prod}/api/summarize`, { text });
       setSummary(response.data.summary);
     } catch (err) {
       setError("Error summarizing text. Please try again.");
@@ -56,48 +57,3 @@ export default function TextSummarize() {
   );
 }
 
-
-
-// import axios from "axios";
-// import { useState } from "react";
-
-// const TextSummarize = () => {
-//   const [text, setText] = useState("");
-//   const [summary, setSummary] = useState("");
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
-//     try {
-//       const response = await axios.post(
-//         "http://localhost:3000/api/summarize",
-//         { text },
-//         {
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           withCredentials: true,  // ✅ CORS issue fix
-//         }
-//       );
-
-//       console.log("Response:", response.data);
-//       setSummary(response.data.summary);
-//     } catch (error) {
-//       console.error("Error summarizing:", error);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <textarea
-//         value={text}
-//         onChange={(e) => setText(e.target.value)}
-//         placeholder="Enter text to summarize"
-//       />
-//       <button onClick={handleSubmit}>Summarize</button>
-//       <p>Summary: {summary}</p>
-//     </div>
-//   );
-// };
-
-// export default TextSummarize;

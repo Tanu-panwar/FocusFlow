@@ -3,6 +3,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import server from "../environment";
 
 export default function Card({
     task,
@@ -36,7 +37,7 @@ export default function Card({
         setTimeLeft(customTime * 60);
 
         try {
-            await axios.put(`https://focusflowbackend.onrender.com/api/tasks/${taskId}`, {
+            await axios.put(`${server.prod}/api/tasks/${taskId}`, {
                 status: "Doing",
                 taskStartTime: startTime
             },{
@@ -66,7 +67,7 @@ export default function Card({
         setElapsedTime(formatTime(totalTaskTimeSpent));
 
         try {
-            await axios.put(`https://focusflowbackend.onrender.com/api/tasks/${taskId}`, {
+            await axios.put(`${server.prod}/api/tasks/${taskId}`, {
                 status: "Done",
                 taskDuration: totalTaskTimeSpent
             }
@@ -91,7 +92,7 @@ export default function Card({
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`https://focusflowbackend.onrender.com/api/tasks/${taskId}`, {
+            await axios.delete(`${server.prod}/api/tasks/${taskId}`, {
                 withCredentials: true
             });
 

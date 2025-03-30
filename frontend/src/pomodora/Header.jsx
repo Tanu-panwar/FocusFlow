@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import avatarLogo from "../assets/avatar.png";
 import ProgressChart from "./ProgressChart";
 
+
 const Header = ({ setDarkMode, darkMode, searchQuery, setSearchQuery}) => {
 
     const [showProgressChart, setShowProgressChart] = useState(false);

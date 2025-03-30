@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
+import server from "../environment";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +15,7 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("https://focusflowbackend.onrender.com/logout", {
+      const response = await fetch(`${server.prod}/logout`, {
         method: "POST",
         credentials: "include",
       });

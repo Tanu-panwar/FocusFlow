@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import server from "../environment";
 
 function Signup() {
     const navigate = useNavigate();
@@ -34,7 +35,7 @@ function Signup() {
       e.preventDefault();
       try {
         const { data } = await axios.post(
-          "https://focusflowbackend.onrender.com/signup",
+          `${server.prod}/signup`,
           {
             ...inputValue,
           },
