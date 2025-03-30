@@ -1,0 +1,10 @@
+
+services:
+  - type: web
+    name: focusflowfrontend
+    env: static
+    buildCommand: npm run build
+    staticPublishPath: ./build
+    routes:
+      - src: /.*
+        dest: /index.html
