@@ -48,6 +48,7 @@ function Login() {
       const { success, message, token, user} = data;
 
       if (success) {
+        console.log("Token received",token);
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
 
