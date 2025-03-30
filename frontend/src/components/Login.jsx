@@ -53,7 +53,8 @@ function Login() {
 
         handleSuccess(message);
         setTimeout(() => {
-          navigate("/");
+          console.log("Navigate to Home page");
+          navigate("/", { replace: true });
         }, 1000);
       } else {
         handleError(message);
