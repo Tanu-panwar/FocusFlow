@@ -41,20 +41,17 @@
 - **Mongoose** – Interacting with MongoDB for easy data management and retrieval.
 
 ### 📺 Video Demo
-- Check out our YouTube video for a complete walkthrough of FocusFlow and how it can enhance your productivity!
-```bash
-https://www.youtube.com/watch?v=p6OPGMJODko
-```
+- Check out our YouTube video for a complete walkthrough of **FocusFlow** and how it can enhance your productivity!  
+[Watch the Project Glimpse](https://www.youtube.com/watch?v=p6OPGMJODko)
+
 ### 📸 Social Media
-- Follow us on Instagram for updates, tips, and more!
-```bash
-https://www.instagram.com/focusflow_01/?igsh=MTZidzlodHV1Nm50Yg%3D%3D#
-```
+- Follow us on Instagram for updates, tips, and more!  
+[Follow on Instagram](https://www.instagram.com/focusflow_01/?igsh=MTZidzlodHV1Nm50Yg%3D%3D#)
+
 ### 🌐 Live Link
--Access FocusFlow directly here:
-```bash
-https://focusflowfrontend.onrender.com/login
-```
+- Access **FocusFlow** directly here:  
+[Login to FocusFlow](https://focusflowfrontend.onrender.com/login)
+
 ## ⚙️ Installation & Setup
 
 ### Prerequisites
