@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import avatarLogo from "../assets/avatar.png";
 import ProgressChart from "./ProgressChart";
+import handleDarkMode from "./handleDarkMode.js";
+
 
 const Header = ({ setDarkMode, darkMode, searchQuery, setSearchQuery}) => {
 
