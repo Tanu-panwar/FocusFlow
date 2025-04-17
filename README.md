@@ -40,7 +40,17 @@
 - **MongoDB** – Storing user data (notes, habits, progress) securely and efficiently.
 - **Mongoose** – Interacting with MongoDB for easy data management and retrieval.
 
----
+📺 Video Demo
+Check out our YouTube video for a complete walkthrough of FocusFlow and how it can enhance your productivity!
+Watch the video here
+
+📸 Social Media
+Follow us on Instagram for updates, tips, and more!
+Follow on Instagram
+
+🌐 Live Link
+Access FocusFlow directly here:
+Login to FocusFlow
 
 ## ⚙️ Installation & Setup
 
