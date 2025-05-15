@@ -193,6 +193,11 @@ function Home() {
               Memorize efficiently using interactive flashcards. Reinforce concepts and boost retention with an engaging learning experience.
             </motion.p>
             <motion.div variants={FadeUp(1.0)} initial="initial" animate="animate" className="flex justify-center md:justify-start">
+              {/* <Link to="/flashcard" className="primary-btn bg-[#f23064] text-white rounded-xl px-5 py-3 flex items-center gap-2 group">
+                Get Started
+                <IoIosArrowRoundForward className="text-xl group-hover:translate-x-2 group-hover:-rotate-45 duration-300" />
+              </Link> */}
+
               <Link to="/flashcard" className="primary-btn bg-[#f23064] text-white rounded-xl px-5 py-3 flex items-center gap-2 group">
                 Get Started
                 <IoIosArrowRoundForward className="text-xl group-hover:translate-x-2 group-hover:-rotate-45 duration-300" />
