@@ -57,10 +57,10 @@ function Navbar() {
           </svg>
         </button>
 
-        {/* Navbar Links */}
         <div className={`md:flex md:items-center ${isOpen ? "block" : "hidden"} w-full md:w-auto`}>
           <ul className="md:flex space-y-4 md:space-y-0 md:space-x-6 text-center md:text-left mt-4 md:mt-0">
             <li><Link className="text-[#f23064] hover:text-gray-300" to="/">Home</Link></li>
+            <li><Link className="text-[#f23064] hover:text-gray-300" to="/flashcard">FlashCard</Link></li>
             <li><Link className="text-[#f23064] hover:text-gray-300" to="/habits">Habit Track</Link></li>
             <li><Link className="text-[#f23064] hover:text-gray-300" to="/notes">Notes</Link></li>
             <li><Link className="text-[#f23064] hover:text-gray-300" to="/pomodora">Pomodora</Link></li>

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import server from "../environment";
 
 import { motion } from "framer-motion";
 import { IoIosArrowRoundForward } from "react-icons/io";
@@ -36,7 +35,7 @@ function Home() {
     const verifyToken = async () => {
       try {
         const { data } = await axios.post(
-          `${server.prod}`,
+          "https://focusflowbackend.onrender.com",
           {},
           {
             headers: { Authorization: `Bearer ${token}` },

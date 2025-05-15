@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import './App.css';
@@ -14,6 +15,7 @@ import "./pomodora/global.css";
 
 import Navbar from "./components/Navbar";
 
+import FlashApp from "./FlashApp";
 import Note from "./pages/Home/Note";
 import Section from "./pomodora/Section";
 
@@ -24,6 +26,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home/>} />
+        <Route path="/flashcard/*" element={<FlashApp />} />
         <Route path="/habits" element={<HabitDashboard/> } />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

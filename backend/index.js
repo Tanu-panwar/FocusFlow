@@ -4,12 +4,15 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const cardRoutes =require("./routes/card-route.js");
+const deckRoutes =require("./routes/deck-route.js");
 const app = express();
 
 dotenv.config();
 
 app.use(
   cors({
+    // origin:"http://localhost:5173",
     origin:"https://focusflowfrontend.onrender.com",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -42,6 +45,11 @@ app.use('/api/habits', require('./routes/habit'));
 
 //text summary
 app.use('/api/summarize', require('./routes/textSummary'));
+
+//flashcard
+app.use("/api/flash/createcard",cardRoutes)
+app.use("/api/flash/createDeck",deckRoutes)
+
 
 app.use((req, res, next) => {
   console.log(res.getHeaders()); // This will print the headers
