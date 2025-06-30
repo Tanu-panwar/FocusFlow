@@ -10,6 +10,7 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 import banner from "../assets/banner.png";
 import education from "../assets/education.png";
 import HeroPng from "../assets/hero.png";
+import baseURL from "../environment";
 
 export const FadeUp = (delay) => ({
   initial: { opacity: 0, y: 50 },
@@ -22,44 +23,43 @@ export const FadeUp = (delay) => ({
 
 function Home() {
   const navigate = useNavigate();
-  const [cookies, removeCookie] = useCookies([]);
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/login");
-      return;
-    }
+  const token = localStorage.getItem("token");
+  if (!token) {
+    navigate("/login");
+    return;
+  }
 
-    const verifyToken = async () => {
-      try {
-        const { data } = await axios.post(
-          "https://focusflowbackend.onrender.com",
-          {},
-          {
-            headers: { Authorization: `Bearer ${token}` },
-            withCredentials: true,
-          }
-        );
-
-        if (data.status) {
-          setUsername(data.user);
-          toast.success(`Hello ${data.user}`, { position: "top-right" });
-        } else {
-          localStorage.removeItem("token");
-          navigate("/login");
+  const verifyToken = async () => {
+    try {
+      const { data } = await axios.get(
+        `${baseURL}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          withCredentials: false 
         }
-      } catch (error) {
+      );
+
+      if (data.status) {
+        setUsername(data.user);
+        toast.success(`Hello ${data.user}`, { position: "top-right" });
+      } else {
         localStorage.removeItem("token");
         navigate("/login");
       }
-    };
+    } catch (error) {
+      localStorage.removeItem("token");
+      navigate("/login");
+    }
+  };
 
-    verifyToken();
-  }, [navigate]);
+  verifyToken();
+}, [navigate]);
 
-  return (
+
+return (
     <div className="bg-zinc-800 px-5">
       <h2 className="mb-3 py-3 text-[#f23064] text-center text-2xl">
         <i>Welcome <span>{username}</span></i>

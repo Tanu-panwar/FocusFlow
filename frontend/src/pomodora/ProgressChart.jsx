@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { Cell, Legend, Pie, PieChart, Tooltip } from 'recharts';
-import server from '../environment';
+import baseURL from '../environment';
 
 export default function ProgressChart({ onClose }) {
     const [chartData, setChartData] = useState([]);
@@ -30,7 +30,7 @@ export default function ProgressChart({ onClose }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${server.prod}/api/tasks`, {
+                const response = await axios.get(`${baseURL}/api/tasks`, {
                     withCredentials: true
                 });
 

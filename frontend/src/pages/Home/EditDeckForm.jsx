@@ -4,12 +4,13 @@ import { Form, Formik } from 'formik';
 import React from 'react';
 import Button from '../../components/ui/button/Button';
 import { DeckSchema } from '../../schema/DeckSchema';
+import baseURL from '../../environment';
 
 const EditDeckForm = ({ deck, onClose, onDeckUpdate }) => {
   const updateDeckHandler = async (data) => {
     try {
       const response = await axios.put(
-        `https://focusflowbackend.onrender.com/api/flash/createDeck/${deck._id}`,
+        `${baseURL}/api/flash/createDeck/${deck._id}`,
         {
           name: data.name,
           description: data.description,

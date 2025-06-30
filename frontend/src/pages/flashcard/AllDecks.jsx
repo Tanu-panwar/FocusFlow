@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import axios from 'axios';
 
+import baseURL from "../../environment"
+
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -22,7 +24,7 @@ const AllDecks = () => {
   useEffect(() => {
     const fetchDecks = async () => {
       try {
-        const response =await axios.get("https://focusflowbackend.onrender.com/api/flash/createDeck/all", {
+        const response =await axios.get(`${baseURL}/api/flash/createDeck/all`, {
           withCredentials: true
         });
         
@@ -44,7 +46,7 @@ const AllDecks = () => {
   if (!confirmDelete) return;
 
   try {
-    await axios.delete(`http://localhost:3000/api/flash/createDeck/${id}`, {
+    await axios.delete(`${baseURL}/api/flash/createDeck/${id}`, {
       withCredentials: true,
     });
     setDecks(decks.filter(deck => deck._id !== id));
@@ -62,7 +64,7 @@ const handleEdit = (deck) => {
 
   axios
     .put(
-      `http://localhost:3000/api/flash/createDeck/${deck._id}`,
+      `${baseURL}/api/flash/createDeck/${deck._id}`,
       { name: newName},
       { withCredentials: true }
     )

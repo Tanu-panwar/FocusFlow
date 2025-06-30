@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import NoteCard from "../../components/Cards/NoteCard";
 import EmptyCard from "../../components/EmptyCard/EmptyCard";
 import Notebar from "../../components/Notebar";
-import server from "../../environment";
+import baseURL from "../../environment";
 import AddEditNotes from "./AddEditNotes";
 
 const Note = () => {
@@ -37,7 +37,7 @@ const Note = () => {
     if (!userToken) return;
 
     try {
-      const res = await axios.get(`${server.prod}/api/note/all`, {
+      const res = await axios.get(`${baseURL}/api/note/all`, {
         headers: { Authorization: `Bearer ${userToken}` },
         withCredentials: true,
       });
@@ -61,7 +61,7 @@ const Note = () => {
 
     try {
       const res = await axios.delete(
-        `${server.prod}/api/note/delete/${data._id}`,
+        `${baseURL}/api/note/delete/${data._id}`,
         {
           headers: { Authorization: `Bearer ${userToken}` },
           withCredentials: true,
@@ -84,7 +84,7 @@ const Note = () => {
     const userToken = localStorage.getItem("token");
 
     try {
-      const res = await axios.get(`${server.prod}/api/note/search`, {
+      const res = await axios.get(`${baseURL}/api/note/search`, {
         params: { query },
         headers: { Authorization: `Bearer ${userToken}` },
         withCredentials: true,
@@ -112,7 +112,7 @@ const Note = () => {
 
     try {
       const res = await axios.put(
-        `${server.prod}/api/note/update-note-pinned/${noteData._id}`,
+        `${baseURL}/api/note/update-note-pinned/${noteData._id}`,
         { isPinned: !noteData.isPinned },
         {
           headers: { Authorization: `Bearer ${userToken}` },

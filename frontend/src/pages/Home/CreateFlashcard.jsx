@@ -8,6 +8,7 @@ import CreateTerm from "../../components/CreateTerm";
 import Button from "../../components/ui/button/Button";
 import Toast from "../../components/ui/toast/Toast";
 import { flashcardSchema } from "../../schema/validation";
+import baseURL from '../../environment';
 
 const CreateFlashcard = () => {
   const location = useLocation();
@@ -23,57 +24,63 @@ const CreateFlashcard = () => {
 
   const fetchDecks = async () => {
     try {
-      const response = await axios.get(`https://focusflowbackend.onrender.com/api/flash/createDeck/all`);
+      const response = await axios.get(`${baseURL}/api/flash/createDeck/all`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true, 
+      });
       setDecks(response.data); // assuming setDecks is a state hook
     } catch (err) {
       console.error("Error fetching decks:", err.message);
     }
   };
 
-  fetchDecks();
-}, []);
+    fetchDecks();
+  }, []);
 
   const [toast, setToast] = useState(false);
 
+
   const createCardHandler = async (data) => {
-    const user = JSON.parse(localStorage.getItem('user')); // or use context
-    const userId = user?._id;
+  const user = JSON.parse(localStorage.getItem("user"));
+  const userId = user?._id;
 
-    try {
-      const { terms } = data;
-      // Loop through each term and send a request
-      if(typeof selectedDecks[0]=="object")
-          selectedDecks = [selectedDecks[0]._id]
-      const promises = terms.map(async (termData) => {
-        const requestBody = {
-          userId: userId,
-          deckName: selectedDecks,
-          term: termData.term,
-          defination: termData.defination,
-          isImage: termData.image || null,
-        };
+  try {
+    const { terms } = data;
 
-        console.log("Sending Data:", requestBody);
+    const deckIdList = selectedDecks.map(d =>
+      typeof d === "object" ? d._id : d
+    );
 
-        const response =await axios.post("https://focusflowbackend.onrender.com/api/flash/createcard/create",requestBody, {
-          withCredentials: true
-        });
+    const promises = terms.map(async (termData) => {
+      const requestBody = {
+        userId,
+        deckName: deckIdList,
+        term: termData.term,
+        defination: termData.defination,
+        isImage: termData.image || null,
+      };
 
-        if (!response.ok) {
-          const result = await response.json();
-          throw new Error(result.message || "Something went wrong!");
-        }
+      console.log("Sending Data:", requestBody);
 
-        return response.json();
-      });
-      const results = await Promise.all(promises);
-      console.log("All Cards Created:", results);
-    } catch (error) {
-      console.error("Error creating cards:", error.message);
-    }
-  };
+      const response = await axios.post(
+        `${baseURL}/api/flash/createcard/create`,
+        requestBody,
+        { withCredentials: true }
+      );
 
-  return (
+      return response.data;
+    });
+
+    const results = await Promise.all(promises);
+    console.log("All Cards Created:", results);
+  } catch (error) {
+    console.error("Error creating cards:", error.response?.data?.message || error.message);
+  }
+};
+
+return (
     <>
       {/* select Group  */}
       {/* <DropDown setSelectedDecks={setSelectedDecks} preSelectedDecks={selectedDecks} /> */}

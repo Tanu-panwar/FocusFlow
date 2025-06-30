@@ -6,8 +6,11 @@ import CreateGroup from "../../components/CreateGroup";
 import Button from "../../components/ui/button/Button";
 import Toast from "../../components/ui/toast/Toast";
 import { DeckSchema } from "../../schema/DeckSchema";
+import baseURL from '../../environment';
+import { useNavigate } from 'react-router-dom';
 
 const CreateDeck = () => {
+  const navigate = useNavigate();
   const [toast, setToast] = useState(false);
 
   // 🔐 Create deck handler with auth token
@@ -24,17 +27,18 @@ const CreateDeck = () => {
 
       console.log("Sending Data:", requestBody);
 
-      const response = await axios.post("https://focusflowbackend.onrender.com/api/flash/createDeck/create",requestBody, {
+      const response = await axios.post(`${baseURL}/api/flash/createDeck/create`,requestBody, {
         withCredentials: true 
       });
 
-      const result = await response.json();
+      const result = response.data;
 
-      if (!response.ok) {
-        throw new Error(result.message || "Something went wrong!");
+      if (!result || !result.deck || !result.deck._id) {
+        throw new Error("Deck creation failed or invalid response.");
       }
-
+      localStorage.setItem("deckId", result.deck._id);
       console.log("Deck created:", result);
+      
     } catch (error) {
       console.error("Error creating deck:", error.message);
     }

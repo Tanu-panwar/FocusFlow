@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from "axios";
 import React, { useEffect, useRef, useState } from 'react';
 import pomodoroVoice from '../assets/my_app_src_assests_pomodoro_voice.mp3';
-import server from '../environment';
+import baseURL from '../environment';
 import Card from "./Card";
 
 export default function Main({ darkMode, tasks, setTasks, searchQuery }) {
@@ -34,7 +34,7 @@ export default function Main({ darkMode, tasks, setTasks, searchQuery }) {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const response = await axios.get(`${server.prod}/api/tasks`, {
+                const response = await axios.get(`${baseURL}/api/tasks`, {
                     withCredentials: true
                 });
                 setTasks(response.data);
@@ -88,7 +88,7 @@ export default function Main({ darkMode, tasks, setTasks, searchQuery }) {
             setTimeLeft((prevTime) => {
                 if (prevTime <= 1) {
                     clearInterval(breakTimerRef.current);
-                    axios.put(`${server.prod}/api/tasks/${taskStarted}`, {
+                    axios.put(`${baseURL}/api/tasks/${taskStarted}`, {
                         breakTime: minutes * 60,
                         taskDuration: Math.floor((Date.now() - taskStartTime) / 1000)  
                     }, {

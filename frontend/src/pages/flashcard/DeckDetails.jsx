@@ -11,6 +11,7 @@ import {
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import baseURL from "../../environment";
 
 function DeckDetails() {
   const { id } = useParams();
@@ -22,11 +23,12 @@ function DeckDetails() {
   useEffect(() => {
     const fetchDeckDetails = async () => {
       try {
-        const response = await axios.get(`https://focusflowbackend.onrender.com/api/flash/createdeck/one/${id}`,{
+        const response = await axios.get(`${baseURL}/api/flash/createdeck/one/${id}`,{
           withCredentials: true,
         });
         setDeck(response.data.deck);
         setCards(response.data.cards);
+      
       } catch (error) {
         console.error("Server error:", error);
       } finally {

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 import axios from 'axios';
+import baseURL from "../../environment";
 
 const FlashcardDetails = () => {
   const { deckid, id } = useParams();
@@ -12,7 +13,7 @@ const FlashcardDetails = () => {
   useEffect(() => {
     const fetchFlashcard = async () => {
       try {
-        const response = await axios.get(`https://focusflowbackend.onrender.com/api/flash/createcard/deck/${deckid}/card/${id}`,{
+        const response = await axios.get(`${baseURL}/api/flash/createcard/deck/${deckid}/card/${id}`,{
           withCredentials:true,
         });
 

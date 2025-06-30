@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import avatarLogo from "../assets/avatar.png";
-import server from "../environment";
+import baseURL from "../environment";
 
 const HabitTracker = ({ user, habits, weeklyDate}) => {
   const [today, setToday] = useState("");
@@ -20,7 +20,7 @@ const HabitTracker = ({ user, habits, weeklyDate}) => {
     const habitContent = document.getElementById("habit").value;
     try {
       const response = await axios.post(
-        `${server.prod}/api/habits/create`,
+        `${baseURL}/api/habits/create`,
         { content: habitContent },
         { withCredentials: true } 
       );
@@ -40,7 +40,7 @@ const HabitTracker = ({ user, habits, weeklyDate}) => {
 
   const handleStatusUpdate = async (habitId, date) => {
     try {
-      const response = await axios.get(`${server.prod}/api/habits/status-update?id=${habitId}&date=${date}`, { withCredentials: true });
+      const response = await axios.get(`${baseURL}/api/habits/status-update?id=${habitId}&date=${date}`, { withCredentials: true });
       if (response.status === 200) {
         window.location.reload(); // Refresh state after update
       }
@@ -51,7 +51,7 @@ const HabitTracker = ({ user, habits, weeklyDate}) => {
 
   const handleFavoriteToggle = async (habitId) => {
     try {
-      const response = await axios.get(`${server.prod}/api/habits/favorite-habit?id=${habitId}`, { withCredentials: true });
+      const response = await axios.get(`${baseURL}/api/habits/favorite-habit?id=${habitId}`, { withCredentials: true });
       if (response.status === 200) {
         window.location.reload(); // Refresh state after update
       }
@@ -62,7 +62,7 @@ const HabitTracker = ({ user, habits, weeklyDate}) => {
 
   const handleDeleteHabit = async (habitId) => {
     try {
-      const response = await axios.get(`${server.prod}/api/habits/remove?id=${habitId}`, { withCredentials: true });
+      const response = await axios.get(`${baseURL}/api/habits/remove?id=${habitId}`, { withCredentials: true });
       if (response.status === 200) {
         window.location.reload(); // Refresh state after update
       }

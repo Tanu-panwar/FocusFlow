@@ -1,30 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
-import server from "../environment";
+import baseURL from "../environment";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
-  const [isLoggedIn, setIsLoggedIn] = useState(cookies.token); // Track login status
-
-  useEffect(() => {
-    setIsLoggedIn(cookies.token); 
-  }, [cookies.token]); 
+  const isLoggedIn = Boolean(localStorage.getItem("token"));
 
   const handleLogout = async () => {
     try {
-      const response = await fetch(`${server.prod}/logout`, {
+      const response = await fetch(`${baseURL}/logout`, {
         method: "POST",
-        credentials: "include",
+        credentials: "include", 
       });
 
       const data = await response.json();
       if (response.ok) {
         console.log(data.message);
-        removeCookie("token");
-        setIsLoggedIn(false); // Ensure UI updates after logout
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
         navigate("/login");
       } else {
         console.error("Logout failed:", data.message);

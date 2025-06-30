@@ -1,7 +1,7 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import server from "../environment";
+import baseURL from "../environment";
 import HabitTracker from "./HabitTracker";
 
 const HabitDashboard = () => {
@@ -13,7 +13,7 @@ const HabitDashboard = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) setUser(storedUser);
 
-    axios.get(`${server.prod}/api/habits`, {
+    axios.get(`${baseURL}/api/habits`, {
         withCredentials: true,
       })
       .then((response) => {

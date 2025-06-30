@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import server from "../environment.js";
+import baseURL from "../environment.js";
 import './global.css';
 
 function Aside({ setDarkMode, darkMode, tasks, setTasks }) {
@@ -19,7 +19,7 @@ function Aside({ setDarkMode, darkMode, tasks, setTasks }) {
         
         async function fetchTasks() {
             try {
-                const response = await axios.get(`${server.prod}/api/tasks`, {
+                const response = await axios.get(`${baseURL}/api/tasks`, {
                     withCredentials: true
                 });
         
@@ -47,13 +47,13 @@ function Aside({ setDarkMode, darkMode, tasks, setTasks }) {
     
         try {
             // Add new task
-            await axios.post(`${server.prod}/api/tasks`, newTask, {
+            await axios.post(`${baseURL}/api/tasks`, newTask, {
                 
                 withCredentials: true // Ensure credentials (cookies) are sent
             });
     
             // Fetch updated tasks
-            const response = await axios.get(`${server.prod}/api/tasks`, {
+            const response = await axios.get(`${baseURL}/api/tasks`, {
                 
                 withCredentials: true
             });

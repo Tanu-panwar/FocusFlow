@@ -9,16 +9,19 @@ const deckRoutes =require("./routes/deck-route.js");
 const app = express();
 
 dotenv.config();
+require("./reminder");
 
 app.use(
   cors({
-    // origin:"http://localhost:5173",
+    // origin: "http://localhost:5173",
     origin:"https://focusflowfrontend.onrender.com",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   })
 );
+app.options("*", cors()); // <-- allow preflight for all routes
+
 
 app.use(cookieParser());
 app.use(express.json());
@@ -68,7 +71,7 @@ app.use((err, req, res, next) => {
   })
 })
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => 
     console.log(`Server running on port ${PORT}`)
 );

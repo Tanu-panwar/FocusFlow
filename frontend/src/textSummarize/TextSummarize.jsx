@@ -1,7 +1,7 @@
 
 import axios from "axios";
 import { useState } from "react";
-import server from "../environment";
+import baseURL from "../environment";
 
 export default function TextSummarize() {
   const [text, setText] = useState("");
@@ -16,7 +16,7 @@ export default function TextSummarize() {
     setSummary("");
 
     try {
-      const response = await axios.post(`${server.prod}/api/summarize`, { text });
+      const response = await axios.post(`${baseURL}/api/summarize`, { text });
       setSummary(response.data.summary);
     } catch (err) {
       setError("Error summarizing text. Please try again.");
