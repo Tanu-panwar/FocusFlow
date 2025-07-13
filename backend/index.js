@@ -4,8 +4,8 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const cardRoutes =require("./routes/card-route.js");
-const deckRoutes =require("./routes/deck-route.js");
+const cardRoutes = require("./routes/card-route.js");
+const deckRoutes = require("./routes/deck-route.js");
 const app = express();
 
 dotenv.config();
@@ -13,8 +13,8 @@ require("./reminder");
 
 app.use(
   cors({
-    // origin: "http://localhost:5173",
-    origin:"https://focusflowfrontend.onrender.com",
+    origin: "http://localhost:5173",
+    // origin:"https://focusflowfrontend.onrender.com",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
@@ -29,18 +29,18 @@ app.use(express.urlencoded({ extended: false }));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("MongoDB Connected"))
-.catch(err => console.log(err));
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
 
 // Routes
 const authRoutes = require("./routes/auth");
 app.use("/", authRoutes);
 
-const taskRoutes=require("./routes/TaskRoute.js");
+const taskRoutes = require("./routes/TaskRoute.js");
 app.use('/api', taskRoutes);
 
 //add sticky notes
-const noteRouter =require("./routes/noteRoutes.js")
+const noteRouter = require("./routes/noteRoutes.js")
 app.use("/api/note", noteRouter)
 
 //habit
@@ -50,8 +50,8 @@ app.use('/api/habits', require('./routes/habit'));
 app.use('/api/summarize', require('./routes/textSummary'));
 
 //flashcard
-app.use("/api/flash/createcard",cardRoutes)
-app.use("/api/flash/createDeck",deckRoutes)
+app.use("/api/flash/createcard", cardRoutes)
+app.use("/api/flash/createDeck", deckRoutes)
 
 
 app.use((req, res, next) => {
@@ -72,6 +72,6 @@ app.use((err, req, res, next) => {
 })
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => 
-    console.log(`Server running on port ${PORT}`)
+app.listen(PORT, () =>
+  console.log(`Server running on port ${PORT}`)
 );
