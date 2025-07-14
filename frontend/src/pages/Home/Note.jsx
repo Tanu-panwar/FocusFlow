@@ -1,3 +1,4 @@
+
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { MdAdd } from "react-icons/md";
@@ -11,19 +12,21 @@ import baseURL from "../../environment";
 import AddEditNotes from "./AddEditNotes";
 
 const Note = () => {
+  const [noteToDelete, setNoteToDelete] = useState(null);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+
   const [allNotes, setAllNotes] = useState([]);
   const [isSearch, setIsSearch] = useState(false);
-  const navigate = useNavigate();
-
   const [openAddEditModal, setOpenAddEditModal] = useState({
     isShown: false,
     type: "add",
     data: null,
   });
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const userToken = localStorage.getItem("token");
-
     if (!userToken) {
       toast.error("Unauthorized! Please log in.");
       navigate("/login");
@@ -33,12 +36,12 @@ const Note = () => {
   }, [navigate]);
 
   const getAllNotes = async () => {
-    const userToken = localStorage.getItem("token");
-    if (!userToken) return;
+    const token = localStorage.getItem("token");
+    if (!token) return;
 
     try {
       const res = await axios.get(`${baseURL}/api/note/all`, {
-        headers: { Authorization: `Bearer ${userToken}` },
+        headers: { Authorization: `Bearer ${token}` },
         withCredentials: true,
       });
 
@@ -47,57 +50,77 @@ const Note = () => {
       } else {
         toast.error(res.data.message);
       }
-    } catch (error) {
+    } catch {
       toast.error("Failed to fetch notes.");
     }
   };
 
-  const handleEdit = (noteDetails) => {
-    setOpenAddEditModal({ isShown: true, data: noteDetails, type: "edit" });
+  const handleEdit = (note) => {
+    setOpenAddEditModal({ isShown: true, type: "edit", data: note });
   };
 
-  const deleteNote = async (data) => {
+
+  const confirmDelete = async () => {
     const userToken = localStorage.getItem("token");
-
     try {
-      const res = await axios.delete(
-        `${baseURL}/api/note/delete/${data._id}`,
-        {
-          headers: { Authorization: `Bearer ${userToken}` },
-          withCredentials: true,
-        }
-      );
-
-      if (!res.data.success) {
-        toast.error(res.data.message);
-        return;
-      }
-
-      toast.success("Note deleted successfully.");
-      getAllNotes();
-    } catch (error) {
-      toast.error("Error deleting note.");
-    }
-  };
-
-  const onSearchNote = async (query) => {
-    const userToken = localStorage.getItem("token");
-
-    try {
-      const res = await axios.get(`${baseURL}/api/note/search`, {
-        params: { query },
+      const res = await axios.delete(`${baseURL}/api/note/delete/${noteToDelete._id}`, {
         headers: { Authorization: `Bearer ${userToken}` },
         withCredentials: true,
       });
 
       if (!res.data.success) {
         toast.error(res.data.message);
-        return;
+      } else {
+        toast.success("Note deleted successfully.");
+        getAllNotes();
       }
-
-      setIsSearch(true);
-      setAllNotes(res.data.notes);
     } catch (error) {
+      toast.error("Error deleting note.");
+    } finally {
+      setNoteToDelete(null);
+      setShowConfirmModal(false);
+    }
+  };
+
+
+  // const deleteNote = async (note) => {
+  //   const token = localStorage.getItem("token");
+
+  //   try {
+  //     const res = await axios.delete(`${baseURL}/api/note/delete/${note._id}`, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //       withCredentials: true,
+  //     });
+
+  //     if (!res.data.success) {
+  //       toast.error(res.data.message);
+  //       return;
+  //     }
+
+  //     toast.success("Note deleted.");
+  //     getAllNotes();
+  //   } catch {
+  //     toast.error("Error deleting note.");
+  //   }
+  // };
+
+  const onSearchNote = async (query) => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const res = await axios.get(`${baseURL}/api/note/search`, {
+        params: { query },
+        headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
+      });
+
+      if (res.data.success) {
+        setIsSearch(true);
+        setAllNotes(res.data.notes);
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch {
       toast.error("Search failed.");
     }
   };
@@ -107,27 +130,26 @@ const Note = () => {
     getAllNotes();
   };
 
-  const updateIsPinned = async (noteData) => {
-    const userToken = localStorage.getItem("token");
+  const updateIsPinned = async (note) => {
+    const token = localStorage.getItem("token");
 
     try {
       const res = await axios.put(
-        `${baseURL}/api/note/update-note-pinned/${noteData._id}`,
-        { isPinned: !noteData.isPinned },
+        `${baseURL}/api/note/update-note-pinned/${note._id}`,
+        { isPinned: !note.isPinned },
         {
-          headers: { Authorization: `Bearer ${userToken}` },
+          headers: { Authorization: `Bearer ${token}` },
           withCredentials: true,
         }
       );
 
-      if (!res.data.success) {
+      if (res.data.success) {
+        toast.success("Note updated.");
+        getAllNotes();
+      } else {
         toast.error(res.data.message);
-        return;
       }
-
-      toast.success("Note updated successfully.");
-      getAllNotes();
-    } catch (error) {
+    } catch {
       toast.error("Error updating note.");
     }
   };
@@ -136,9 +158,9 @@ const Note = () => {
     <>
       <Notebar onSearchNote={onSearchNote} handleClearSearch={handleClearSearch} />
 
-      <div className="container mx-auto shadow-xl py-4 px-5 rounded w-[100%] h-screen">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-10 py-6 min-h-screen">
         {allNotes.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-4 max-md:m-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
             {allNotes.map((note) => (
               <NoteCard
                 key={note._id}
@@ -148,7 +170,11 @@ const Note = () => {
                 tags={note.tags}
                 isPinned={note.isPinned}
                 onEdit={() => handleEdit(note)}
-                onDelete={() => deleteNote(note)}
+                onDelete={() => {
+                  setNoteToDelete(note);
+                  setShowConfirmModal(true);
+                }}
+
                 onPinNote={() => updateIsPinned(note)}
               />
             ))}
@@ -169,22 +195,21 @@ const Note = () => {
         )}
       </div>
 
-      {/* Floating Add Note Button */}
+      {/* Floating Add Button */}
       <button
-        className="fixed bottom-6 right-6 w-16 h-16 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-700 shadow-lg transition-transform transform hover:scale-105"
+        className="fixed bottom-5 right-5 w-14 h-14 flex items-center justify-center rounded-full bg-blue-600 hover:bg-blue-700 text-white text-3xl shadow-lg transition-transform transform hover:scale-105 z-50"
         onClick={() => setOpenAddEditModal({ isShown: true, type: "add", data: null })}
+        aria-label="Add Note"
       >
-        <MdAdd className="text-[32px] text-white" />
+        <MdAdd />
       </button>
 
-      {/* Add/Edit Note Modal */}
+      {/* Add/Edit Modal */}
       <Modal
         isOpen={openAddEditModal.isShown}
         onRequestClose={() => setOpenAddEditModal({ isShown: false })}
-        style={{
-          overlay: { backgroundColor: "rgba(0,0,0,0.4)" },
-        }}
-        className="w-full max-w-lg sm:max-w-md bg-white rounded-lg shadow-lg mx-auto mt-20 p-6 overflow-auto"
+        style={{ overlay: { backgroundColor: "rgba(0,0,0,0.4)" } }}
+        className="w-[90%] mt-6 max-w-lg bg-white rounded-lg shadow-lg mx-auto mt-20 p-6 overflow-auto outline-none"
       >
         <AddEditNotes
           onClose={() => setOpenAddEditModal({ isShown: false })}
@@ -193,6 +218,56 @@ const Note = () => {
           getAllNotes={getAllNotes}
         />
       </Modal>
+
+      {/* deletion model */}
+      <Modal
+        isOpen={showConfirmModal}
+        onRequestClose={() => setShowConfirmModal(false)}
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: 1000,
+            padding: "10px"
+          },
+          content: {
+            maxWidth: "400px",
+            margin: "auto",
+            padding: "0",
+            border: "none",
+            borderRadius: "12px",
+            overflow: "hidden",
+            inset: "40px",
+            height: "200px",
+            maxHeight: "250px"
+          },
+        }}
+        ariaHideApp={false}
+      >
+        <div className="bg-white p-6 text-center shadow-xl rounded-lg">
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">
+            Confirm Deletion
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Are you sure you want to delete this note? This action cannot be undone.
+          </p>
+
+          <div className="flex justify-center gap-4 px-6">
+            <button
+              className="bg-red-500 hover:bg-red-600 text-white font-semibold px-5 py-2 rounded transition duration-200"
+              onClick={confirmDelete}
+            >
+              Delete
+            </button>
+            <button
+              className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold px-5 py-2 rounded transition duration-200"
+              onClick={() => setShowConfirmModal(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </Modal >
+
     </>
   );
 };

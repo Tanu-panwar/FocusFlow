@@ -76,7 +76,7 @@ const AddEditNotes = ({ onClose, noteData, type, getAllNotes }) => {
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50">
+    <div className="fixed inset-0 mt-8 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50">
       <div className="relative bg-white shadow-xl rounded-lg p-6 w-full max-w-lg">
         {/* Close Button */}
         <button

@@ -6,10 +6,10 @@ import avatarLogo from "../assets/avatar.png";
 import ProgressChart from "./ProgressChart";
 
 
-const Header = ({ setDarkMode, darkMode, searchQuery, setSearchQuery}) => {
+const Header = ({ setDarkMode, darkMode, searchQuery, setSearchQuery }) => {
 
     const [showProgressChart, setShowProgressChart] = useState(false);
-    const chartRef = useRef(null); 
+    const chartRef = useRef(null);
 
     const handleProgressClick = () => {
         setShowProgressChart(!showProgressChart); // Toggle chart visibility
@@ -50,70 +50,75 @@ const Header = ({ setDarkMode, darkMode, searchQuery, setSearchQuery}) => {
     return (
         <>
             <header
-                className={`${darkMode ? "dark bg-zinc-700" : ""} p-5 flex justify-between h-[80px] w-[100%] items-center shadow-[0_-1px_6px_rgba(0,0,0,0.3)] bg-white`}
+                className={`${darkMode ? "dark bg-zinc-700" : ""} 
+    p-4 sm:p-5 flex flex-col sm:flex-row justify-between items-center 
+    shadow-[0_-1px_6px_rgba(0,0,0,0.3)] bg-white gap-4 sm:gap-0`}
             >
-                <div className="logo lg:block md:block d-flex justify-center items-center lg:w-[15%] md:w-[15%] hidden">
+                {/* Logo */}
+                <div className="hidden sm:flex justify-center items-center w-full sm:w-auto">
                     <a href="#">
                         <p className="text-2xl font-bold text-[#f23064]">Pomodoro</p>
                     </a>
                 </div>
 
-                <div className="search flex justify-center items-center lg:w-[60%] w-[70%] h-[100%] md:w-[60%]">
-                    <input
-                        className={`${darkMode ? "dark text-white" : ""}
-                    dark:bg-zinc-600 w-4/5 border-[#f23064] rounded-l-sm border-2 border-solid
-                    rounded-none h-full pl-2 b2-slate-50 outline-none`}
-                        type="text"
-                        placeholder="Filter By Title..."
+                {/* Search & Progress */}
+                <div className="w-full sm:w-[60%] flex flex-col sm:flex-row items-center justify-center gap-2">
+                    <div className="flex w-full sm:w-[70%]">
+                        <input
+                            className={`${darkMode ? "dark text-white dark:bg-zinc-600" : ""}
+          w-full border-[#f23064] rounded-l-sm border-2 h-10 pl-2 
+          outline-none`}
+                            type="text"
+                            placeholder="Filter By Title..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                        
-                    />
-                    <button
-                        className={`${darkMode ? "dark" : ""}
-                    w-1/5 transition-all h-full font-semibold
-                    rounded-r-sm bg-[#f24064] text-white hover:bg-[#f33064]`}
-                        
-                    >
-                        Filter
-                    </button>
+                        />
+                        <button
+                            className="w-auto px-3 h-10 bg-[#f24064] text-white font-semibold rounded-r-sm 
+        hover:bg-[#f33064] transition"
+                        >
+                            Filter
+                        </button>
+                    </div>
 
-                    <button onClick={handleProgressClick}
-                        className={`${darkMode ? "dark" : ""}
-                    w-1/5 transition-all ml-4 h-full font-semibold
-                    rounded-r-sm bg-[#f24064] text-white hover:bg-[#f33064]`}
-                        
+                    <button
+                        onClick={handleProgressClick}
+                        className="w-full sm:w-auto px-4 h-10 bg-[#f24064] text-white font-semibold 
+      rounded shadow hover:bg-[#f33064] transition"
                     >
                         Progress
                     </button>
                 </div>
 
-                <div className="account text-right flex justify-end lg:w-[15%] md:w-[15%] w-[30%]">
+                {/* Dark Mode Toggle + Avatar */}
+                <div className="flex items-center space-x-3 w-full sm:w-auto justify-end">
                     <button
                         onClick={handleDarkMode}
-                        className={`${darkMode ? "dark hover:bg-zinc-600" : ""} mr-2 w-10 rounded-3xl
-                    dark_mode border-2 border-[#f24064] hover:bg-gray-100`}
+                        className="w-10 h-10 rounded-full border-2 border-[#f24064] 
+      hover:bg-gray-100 dark:hover:bg-zinc-600 flex items-center justify-center"
                     >
-                        {darkMode ? (
-                            <FontAwesomeIcon className="font-semibold text-[#f23064]" icon={faSun} />
-                        ) : (
-                            <FontAwesomeIcon className="font-semibold text-[#f23064]" icon={faMoon} />
-                        )}
+                        <FontAwesomeIcon
+                            className="text-[#f23064]"
+                            icon={darkMode ? faSun : faMoon}
+                        />
                     </button>
                     <img
-                        className="w-10 cursor-pointer rounded-3xl border-2 border-[#f23064]"
+                        className="w-10 h-10 object-cover rounded-full border-2 border-[#f23064]"
                         src={avatarLogo}
-                        alt=""
+                        alt="avatar"
                     />
                 </div>
             </header>
-        {showProgressChart && (
-            <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-                   w-[670px] bg-white shadow-lg rounded-md p-4 z-[1]">
-                <ProgressChart onClose={handleCloseChart} />
-            </div>
-        )} 
-    </>
+
+            {/* Chart Modal */}
+            {showProgressChart && (
+                <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+    w-[90%] max-w-[700px] bg-white shadow-lg rounded-md p-4 z-[50]">
+                    <ProgressChart onClose={handleCloseChart} />
+                </div>
+            )}
+
+        </>
     );
 };
 
