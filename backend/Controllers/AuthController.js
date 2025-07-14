@@ -12,9 +12,15 @@ module.exports.Signup = async (req, res, next) => {
       return res.json({ message: "User already exists" });
     }
     const user = await User.create({ email, password, username, createdAt });
+    const token = createSecretToken(user._id);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+    });
     res
       .status(201)
-      .json({ message: "User signed in successfully", success: true, user });
+      .json({ message: "User signed in successfully", success: true, token, user });
     next();
   } catch (error) {
     console.error(error);
