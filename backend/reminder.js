@@ -4,7 +4,7 @@ const transporter = require("./mailer");
 const User = require("./models/user")
 
 // Schedule: every day at 8 PM (20:00)
-cron.schedule("0 20 * * *", async () => {
+const sendReminderEmails = async (timeLabel) => {
   try {
     const users = await User.find();
     for (let user of users) {
@@ -20,7 +20,7 @@ cron.schedule("0 20 * * *", async () => {
               <p style="font-size: 15px; color: #ddd;">
                 Just a quick reminder to review your flashcards today and keep your learning on track! 🚀
               </p>
-              <a href="http://localhost:5173/login" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background-color: #f23064; color: white; text-decoration: none; border-radius: 5px;">
+              <a href="https://focusflowfrontend.onrender.com" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background-color: #f23064; color: white; text-decoration: none; border-radius: 5px;">
                 Go to Focus Flow
               </a>
               <p style="margin-top: 30px; font-size: 12px; color: #999;">
@@ -29,10 +29,22 @@ cron.schedule("0 20 * * *", async () => {
             </div>
           `,
         });
+        console.log(`${timeLabel} reminder sent to ${user.email}`);
         console.log(`Reminder sent to ${user.email}`);
       }
     }
   } catch (error) {
     console.error("Error sending reminder emails:", error);
   }
+};
+
+
+// 🕗 8:00 AM Reminder
+cron.schedule("0 8 * * *", () => {
+  sendReminderEmails("Morning");
+});
+
+// 🕘 9:00 PM Reminder
+cron.schedule("0 21 * * *", () => {
+  sendReminderEmails("Evening");
 });
