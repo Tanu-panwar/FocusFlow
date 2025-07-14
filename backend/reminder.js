@@ -3,7 +3,6 @@
 const transporter = require("./mailer");
 const User = require("./models/user");
 require("dotenv").config();
-require("./db"); // If you have a separate file to connect to MongoDB
 
 const sendReminderEmails = async (timeLabel) => {
   try {
