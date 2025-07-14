@@ -1,0 +1,39 @@
+
+name: Daily Email Reminder
+
+on:
+  schedule:
+    - cron: '0 3 * * *'    # 8:30 AM IST → 3:00 AM UTC
+    - cron: '30 15 * * *'  # 9:00 PM IST → 3:30 PM UTC
+  workflow_dispatch:
+
+jobs:
+  send-reminders:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Send Morning Reminder
+        if: github.event.schedule == '0 3 * * *'
+        run: node remind.js "Morning"
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+
+      - name: Send Evening Reminder
+        if: github.event.schedule == '30 15 * * *'
+        run: node remind.js "Evening"
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          MONGO_URI: ${{ secrets.MONGO_URI }}
