@@ -3,7 +3,7 @@ name: Daily Email Reminder
 
 on:
   schedule:
-    - cron: '0 3 * * *'    # 8:30 AM IST → 3:00 AM UTC
+    - cron: '15 3 * * *'    # 8:30 AM IST → 3:00 AM UTC
     - cron: '30 15 * * *'  # 9:00 PM IST → 3:30 PM UTC
   workflow_dispatch:
 

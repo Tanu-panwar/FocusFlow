@@ -1,8 +1,23 @@
 
-// remind.js
+
+const mongoose = require("mongoose");
 const transporter = require("./mailer");
 const User = require("./models/user");
 require("dotenv").config();
+
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => {
+    console.log("MongoDB connected in reminder.js");
+    const timeLabel = process.argv[2] || "Daily";
+    sendReminderEmails(timeLabel);
+  })
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+    process.exit(1);
+  });
 
 const sendReminderEmails = async (timeLabel) => {
   try {
@@ -14,17 +29,20 @@ const sendReminderEmails = async (timeLabel) => {
           to: user.email,
           subject: `⏰ ${timeLabel} Study Reminder from Focus Flow`,
           html: `
-            <div style="background-color:#1f1f1f; padding: 30px; font-family: Arial, sans-serif; color: #fff; text-align: center;">
-              <h2 style="color: #f23064;">📚 Focus Flow ${timeLabel} Reminder</h2>
+              <div style="background-color:#1f1f1f; padding: 30px; font-family: Arial, sans-serif; color: #fff; text-align: center;">
+              <h2 style="color: #f23064;">🎯 Focus Flow ${timeLabel} Study Reminder</h2>
               <p style="font-size: 16px;">Hey <strong>${user.username}</strong>,</p>
-              <p style="font-size: 15px; color: #ddd;">
-                Just a quick reminder to review your flashcards today and keep your learning on track! 🚀
+              <p style="font-size: 15px; color: #ddd; margin: 15px 0;">
+                This is your gentle nudge to stay consistent with your study goals today. Whether it's completing a task, revising notes, or practicing something new — make your time count! 💪
+              </p>
+              <p style="font-size: 15px; color: #ccc;">
+                Remember, small efforts daily lead to big results. You're doing great — keep going! 🚀
               </p>
               <a href="https://focusflowfrontend.onrender.com" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background-color: #f23064; color: white; text-decoration: none; border-radius: 5px;">
-                Go to Focus Flow
+                Open Focus Flow
               </a>
               <p style="margin-top: 30px; font-size: 12px; color: #999;">
-                You received this reminder because you're registered with Focus Flow.
+                You received this reminder because you're part of the Focus Flow community.
               </p>
             </div>
           `,
@@ -32,65 +50,15 @@ const sendReminderEmails = async (timeLabel) => {
         console.log(`${timeLabel} reminder sent to ${user.email}`);
       }
     }
-    process.exit(0); // Exit the script after sending
+
+    mongoose.connection.close(() => {
+      console.log("MongoDB connection closed after sending emails");
+      process.exit(0);
+    });
   } catch (error) {
     console.error("Error sending reminder emails:", error);
     process.exit(1);
   }
 };
 
-// Get time label from command line arguments (e.g., "Morning" or "Evening")
-const timeLabel = process.argv[2] || "Daily";
-sendReminderEmails(timeLabel);
 
-
-
-// const cron = require("node-cron");
-// const transporter = require("./mailer");
-// const User = require("./models/user")
-
-// // Schedule: every day at 8 PM (20:00)
-// const sendReminderEmails = async (timeLabel) => {
-//   try {
-//     const users = await User.find();
-//     for (let user of users) {
-//       if (user.email) {
-//         await transporter.sendMail({
-//           from: process.env.EMAIL_USER,
-//           to: user.email,
-//           subject: "⏰ Daily Study Reminder from Focus Flow",
-//           html: `
-//             <div style="background-color:#1f1f1f; padding: 30px; font-family: Arial, sans-serif; color: #fff; text-align: center;">
-//               <h2 style="color: #f23064;">📚 Focus Flow Daily Reminder</h2>
-//               <p style="font-size: 16px;">Hey <strong>${user.username}</strong>,</p>
-//               <p style="font-size: 15px; color: #ddd;">
-//                 Just a quick reminder to review your flashcards today and keep your learning on track! 🚀
-//               </p>
-//               <a href="https://focusflowfrontend.onrender.com" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background-color: #f23064; color: white; text-decoration: none; border-radius: 5px;">
-//                 Go to Focus Flow
-//               </a>
-//               <p style="margin-top: 30px; font-size: 12px; color: #999;">
-//                 You received this reminder because you're registered with Focus Flow.
-//               </p>
-//             </div>
-//           `,
-//         });
-//         console.log(`${timeLabel} reminder sent to ${user.email}`);
-//         console.log(`Reminder sent to ${user.email}`);
-//       }
-//     }
-//   } catch (error) {
-//     console.error("Error sending reminder emails:", error);
-//   }
-// };
-
-
-// // 🕗 8:00 AM Reminder
-// cron.schedule("0 8 * * *", () => {
-//   sendReminderEmails("Morning");
-// });
-
-// // 🕘 9:00 PM Reminder
-// cron.schedule("0 21 * * *", () => {
-//   sendReminderEmails("Evening");
-// });
