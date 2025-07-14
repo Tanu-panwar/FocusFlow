@@ -37,9 +37,9 @@ const sendReminderEmails = async (timeLabel) => {
     }
 
 
-    await mongoose.connection.close();
-    console.log("MongoDB connection closed after sending emails");
-    process.exit(0);
+    // await mongoose.connection.close();
+    // console.log("MongoDB connection closed after sending emails");
+    // process.exit(0);
   } catch (error) {
     console.error("Error sending reminder emails:", error);
     process.exit(1);
