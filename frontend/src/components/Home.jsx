@@ -26,40 +26,40 @@ function Home() {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    navigate("/login");
-    return;
-  }
+    const token = localStorage.getItem("token");
+    // if (!token) {
+    //   navigate("/login");
+    //   return;
+    // }
 
-  const verifyToken = async () => {
-    try {
-      const { data } = await axios.get(
-        `${baseURL}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-          withCredentials: false 
+    const verifyToken = async () => {
+      try {
+        const { data } = await axios.get(
+          `${baseURL}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+            withCredentials: false
+          }
+        );
+
+        if (data.status) {
+          setUsername(data.user);
+          toast.success(`Hello ${data.user}`, { position: "top-right" });
+        } else {
+          localStorage.removeItem("token");
+          navigate("/login");
         }
-      );
-
-      if (data.status) {
-        setUsername(data.user);
-        toast.success(`Hello ${data.user}`, { position: "top-right" });
-      } else {
+      } catch (error) {
         localStorage.removeItem("token");
-        navigate("/login");
+        // navigate("/login");
       }
-    } catch (error) {
-      localStorage.removeItem("token");
-      navigate("/login");
-    }
-  };
+    };
 
-  verifyToken();
-}, [navigate]);
+    verifyToken();
+  }, [navigate]);
 
 
-return (
+  return (
     <div className="bg-zinc-800 px-5">
       <h2 className="mb-3 py-3 text-[#f23064] text-center text-2xl">
         <i>Welcome <span>{username}</span></i>
@@ -207,10 +207,10 @@ return (
         </div>
       </section>
 
-    
+
       <div className="border-t-1 border-[#f23064] my-5 mx-5 shadow-lg"></div>
-            {/* Summarize Section */}
-        <section className="bg-light px-5 overflow-hidden relative min-h-[60vh] flex items-center">
+      {/* Summarize Section */}
+      <section className="bg-light px-5 overflow-hidden relative min-h-[60vh] flex items-center">
         <div className="container grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           {/* Brand Info */}
           <div className="order-2 md:order-1 flex flex-col justify-center text-center md:text-left space-y-6 lg:max-w-[400px]">

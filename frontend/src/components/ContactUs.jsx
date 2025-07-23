@@ -28,7 +28,7 @@ const ContactUs = () => {
         <div className="bg-zinc-800 text-white min-h-screen pt-12 px-6 md:px-20 py-10 animate-fadeIn">
             <div className="max-w-3xl mx-auto">
                 <h1 className="text-4xl font-bold text-center text-[#f23064] mb-4">Contact Us</h1>
-                <p className="text-gray-300 mb-8">
+                <p className="text-gray-300 mb-8 text-[16px]">
                     We'd love to hear from you! Whether you have a question, suggestion, or just want to say hello — feel free to reach out.
                 </p>
 
@@ -80,9 +80,9 @@ const ContactUs = () => {
                     </button>
                 </form>
 
-                <div className="text-center mt-12 text-sm text-gray-500">
+                <div className="text-center mt-12 text-xl text-gray-500">
                     Or email us directly at{" "}
-                    <a href="mailto:support@focusflow.com" className="text-[#f23064] underline">
+                    <a href="mailto:support@focusflow.com" className="text-[#f23064] underline text-[16px]">
                         support@focusflow.com
                     </a>
                 </div>

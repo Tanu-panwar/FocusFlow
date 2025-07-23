@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import './App.css';
-
+import Chatbot from "./components/Chatbot";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Login from './components/Login';
@@ -23,12 +23,13 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsAndConditions from "./components/TermsAndConditions";
 import AboutUs from "./components/AboutUs";
 import WhyFocusFlow from "./components/WhyFocusFlow";
-
+import ScrollLink from "./ScrollLink"
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   return (
     <Router>
       <Navbar />
+      <ScrollLink />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/flashcard/*" element={<FlashApp />} />
@@ -44,6 +45,7 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/why-focusflow" element={<WhyFocusFlow />} />
       </Routes>
+      <Chatbot />
       <Footer />
     </Router>
   );

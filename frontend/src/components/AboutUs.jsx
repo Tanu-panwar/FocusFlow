@@ -77,7 +77,7 @@ const AboutUs = () => {
                 <h1 className="text-4xl font-bold text-[#f23064] mb-4 text-center animate-fade-in">
                     About FocusFlow
                 </h1>
-                <p className="text-lg mb-10 leading-relaxed text-gray-300 text-center animate-slide-up delay-200">
+                <p className="text-xl mb-10 leading-relaxed text-gray-300 text-center animate-slide-up delay-200">
                     At FocusFlow, we believe that productivity is not just about discipline — it's about using the right tools.
                     Our mission is to help students and learners stay organized, focused, and stress-free by offering an all-in-one
                     platform for habit tracking, flashcards, pomodoro sessions, notes, and AI-powered text summarization.
@@ -85,7 +85,7 @@ const AboutUs = () => {
 
                 <div className="bg-zinc-700 p-6 rounded-xl shadow-xl mb-10 transition-all duration-300 hover:shadow-2xl hover:scale-[1.01] animate-fade-in delay-300">
                     <h2 className="text-2xl font-semibold text-white mb-3 text-center">Our Vision</h2>
-                    <p className="text-base text-gray-200 text-center">
+                    <p className="text-[16px] text-gray-200 text-center">
                         To revolutionize how students manage their learning — blending simplicity with smart features, one click at a time.
                     </p>
                 </div>
@@ -93,7 +93,7 @@ const AboutUs = () => {
 
                 <section className="mt-12">
                     <h2 className="text-2xl font-semibold text-white mb-4 text-center">Our Core Values</h2>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-gray-300 text-sm">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-gray-300 text-[16px]">
                         <li className="bg-zinc-700 p-4 rounded-md shadow hover:shadow-2xl hover:scale-[1.01] animate-fade-in delay-300">📌 Simplicity – We make productivity tools easy to use.</li>
                         <li className="bg-zinc-700 p-4 rounded-md shadow hover:shadow-2xl hover:scale-[1.01] animate-fade-in delay-300">🔒 Privacy – Your data stays yours. Always.</li>
                         <li className="bg-zinc-700 p-4 rounded-md shadow hover:shadow-2xl hover:scale-[1.01] animate-fade-in delay-300">🚀 Innovation – Constantly evolving with smart features.</li>
@@ -106,34 +106,34 @@ const AboutUs = () => {
 
                 <section className="mt-20 text-center animate-fade-in">
                     <h2 className="text-3xl font-semibold text-white mb-6">Our Tech Stack</h2>
-                    <p className="text-gray-400 mb-10">
+                    <p className="text-gray-400 mb-10 text-[16px]">
                         FocusFlow is powered by modern, reliable, and scalable technologies.
                     </p>
 
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 px-4 md:px-16 text-[#f23064] text-5xl">
                         <div className="flex flex-col items-center group animate-float">
                             <SiReact />
-                            <p className="text-sm text-white mt-2 group-hover:text-[#f23064]">React.js</p>
+                            <p className="text-[16px] text-white mt-2 group-hover:text-[#f23064]">React.js</p>
                         </div>
                         <div className="flex flex-col items-center group animate-float2">
                             <SiTailwindcss />
-                            <p className="text-sm text-white mt-2 group-hover:text-[#f23064]">Tailwind</p>
+                            <p className="text-[16px] text-white mt-2 group-hover:text-[#f23064]">Tailwind</p>
                         </div>
                         <div className="flex flex-col items-center group animate-float">
                             <SiNodedotjs />
-                            <p className="text-sm text-white mt-2 group-hover:text-[#f23064]">Node.js</p>
+                            <p className="text-[16px] text-white mt-2 group-hover:text-[#f23064]">Node.js</p>
                         </div>
                         <div className="flex flex-col items-center group animate-float2">
                             <SiExpress />
-                            <p className="text-sm text-white mt-2 group-hover:text-[#f23064]">Express.js</p>
+                            <p className="text-[16px] text-white mt-2 group-hover:text-[#f23064]">Express.js</p>
                         </div>
                         <div className="flex flex-col items-center group animate-float">
                             <SiMongodb />
-                            <p className="text-sm text-white mt-2 group-hover:text-[#f23064]">MongoDB</p>
+                            <p className="text-[16px] text-white mt-2 group-hover:text-[#f23064]">MongoDB</p>
                         </div>
                         <div className="flex flex-col items-center group animate-float2">
                             <SiJsonwebtokens />
-                            <p className="text-sm text-white mt-2 group-hover:text-[#f23064]">JWT Auth</p>
+                            <p className="text-[16px] text-white mt-2 group-hover:text-[#f23064]">JWT Auth</p>
                         </div>
                     </div>
                 </section>
@@ -161,9 +161,9 @@ const AboutUs = () => {
                                         className="w-full h-full object-cover"
                                     />
                                 </div>
-                                <h3 className="text-lg font-semibold text-white">{member.name}</h3>
-                                <p className="text-sm text-[#f23064] mb-2">{member.role}</p>
-                                <p className="text-xs text-gray-400 mb-4">{member.bio}</p>
+                                <h3 className="text-xl font-semibold text-white">{member.name}</h3>
+                                <p className="text-[16px] text-[#f23064] mb-2">{member.role}</p>
+                                <p className="text-[15px] text-gray-400 mb-4">{member.bio}</p>
 
                                 <div className="flex justify-center gap-4 text-gray-400 group-hover:text-[#f23064] transition">
                                     <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="hover:scale-110">
@@ -181,7 +181,7 @@ const AboutUs = () => {
                     </div>
                 </section>
 
-                <p className="text-center text-sm text-gray-400 mt-16 animate-fade-in delay-500">
+                <p className="text-center text-xl text-gray-400 mt-16 animate-fade-in delay-500">
                     Empowering student success, one feature at a time. 🚀
                 </p>
             </div>

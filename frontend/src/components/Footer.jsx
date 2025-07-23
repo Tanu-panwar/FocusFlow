@@ -13,7 +13,7 @@ function Footer() {
                 FocusFlow
               </Link>
             </div>
-            <p className="text-lg font-semibold mb-2">Sign up for our newsletter</p>
+            <p className="text-xl font-semibold mb-2">Sign up for our newsletter</p>
             <form className="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-3 mb-6">
               <input
                 type="email"
@@ -32,8 +32,8 @@ function Footer() {
           <div className="md:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm">
 
             <div>
-              <h2 className="text-xl font-semibold mb-3 text-white">Explore Features</h2>
-              <div className="flex flex-col gap-2">
+              <h2 className="text-2xl font-semibold mb-3 text-white">Explore Features</h2>
+              <div className="flex flex-col gap-2 text-[16px]">
                 <Link to="/" className="flex items-center gap-2 hover:text-[#f23064] transition">
                   <i className="fas fa-home"></i> Home
                 </Link>
@@ -56,8 +56,8 @@ function Footer() {
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold mb-3 text-white">About FocusFlow</h2>
-              <div className="flex flex-col gap-2">
+              <h2 className="text-2xl font-semibold mb-3 text-white">About FocusFlow</h2>
+              <div className="flex flex-col gap-2 text-[16px]">
                 <Link to="/about" className="flex items-center gap-2 hover:text-[#f23064] transition">
                   <i className="fas fa-info-circle"></i> About Us
                 </Link>
@@ -84,7 +84,7 @@ function Footer() {
 
 
       <div className="bg-[#f23064] py-4 px-6 text-center text-white flex flex-col md:flex-row md:justify-between md:items-center gap-4">
-        <p className="text-sm md:text-base">
+        <p className="text-xl md:text-base">
           &copy; {new Date().getFullYear()} <span className="font-bold">FocusFlow.com</span>. All rights reserved.
         </p>
 

@@ -84,11 +84,11 @@ const TestimonialSection = () => {
                     className="w-10 h-10 rounded-full object-cover flex-shrink-0"
                 />
                 <div className="min-w-0">
-                    <h4 className="text-white font-medium text-sm">{testimonial.name}</h4>
-                    <p className="text-gray-400 text-xs">{testimonial.company}</p>
+                    <h4 className="text-white font-medium text-xl">{testimonial.name}</h4>
+                    <p className="text-gray-400 text-xl">{testimonial.company}</p>
                 </div>
             </div>
-            <p className="text-gray-300 text-sm leading-relaxed">
+            <p className="text-gray-300 text-[16px] leading-relaxed">
                 {testimonial.text}
             </p>
         </div>
