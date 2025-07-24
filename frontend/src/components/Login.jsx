@@ -45,11 +45,11 @@ function Login() {
         },
         { withCredentials: true }
       );
-      console.log("Server Response:",data);
-      const { success, message, token, user} = data;
+      console.log("Server Response:", data);
+      const { success, message, token, user } = data;
 
       if (success) {
-        console.log("Token received",token);
+        console.log("Token received", token);
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
 
@@ -61,7 +61,7 @@ function Login() {
       } else {
         handleError(message);
       }
-    } 
+    }
     catch (error) {
       console.error("Login Error:", error);
       if (error.response) {
@@ -85,36 +85,36 @@ function Login() {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="email" className="block text-white">Email</label>
-            <input 
-              type="email" 
-              id="email" 
-              name="email" 
-              placeholder="Email" 
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email"
               className="p-2 text-white mt-1 rounded-sm w-[100%] outline-[#f23064] border-[#f23064]
                     border-solid border-x-2 border-y-2 focus:outline-none email"
-                    onChange={handleOnChange}
-                    value={email} 
-              required 
+              onChange={handleOnChange}
+              value={email}
+              required
             />
           </div>
           <div className="mb-4">
             <label htmlFor="password" className="block text-white">Password</label>
-            <input 
-              type="password" 
-              id="password" 
-              name="password" 
-              placeholder="Password" 
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
               className="p-2 text-white mt-1 rounded-sm w-[100%] outline-[#f23064] border-[#f23064]
                     border-solid border-x-2 border-y-2 focus:outline-none password"
-                    onChange={handleOnChange}
-                    value={password}
-              required 
+              onChange={handleOnChange}
+              value={password}
+              required
             />
           </div>
           <button type="submit" className="w-full bg-[#f23064] text-white py-2 rounded-md hover:bg-[#f23064]">Login</button>
         </form>
         <p className="text-center text-white mt-4 text-base">
-          <a href="#" className="text-white hover:underline">Forgot Password?</a>
+          <Link to="/forgetPassword" className="text-white hover:underline">Forgot Password?</Link>
           <br />
           Not registered? <Link to="/signup" className="text-white hover:underline">Create an account</Link>
         </p>

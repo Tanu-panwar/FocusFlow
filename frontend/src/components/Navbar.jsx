@@ -1,7 +1,11 @@
+
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import baseURL from "../environment";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -18,10 +22,20 @@ function Navbar() {
       if (response.ok) {
         console.log(data.message);
         localStorage.removeItem("token");
+        toast.success("👋 Logged out successfully!", {
+        position: "top-right",
+        autoClose: 2000,
+        theme: "light",
+      });
         setIsLoggedIn(false);
         navigate("/login");
       } else {
         console.error("Logout failed:", data.message);
+        toast.error(`Logout failed: ${data.message}`, {
+        position: "top-right",
+        autoClose: 3000,
+        theme: "light",
+      });
       }
     } catch (error) {
       console.error("Logout Error:", error);

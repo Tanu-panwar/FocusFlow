@@ -95,7 +95,7 @@ export const Verification_Email_Template = `
             <p>Hi,</p>
             <p>Thanks for joining <strong>Focus Flow</strong>! Please verify your email using the code below:</p>
             <span class="verification-code">{verificationCode}</span>
-            <a href="https://focusflowfrontend.onrender.com/auth?mode=signup" class="button">Verify Email</a>
+            <a href="https://focusflowfrontend.onrender.com/otp" class="button">Verify Email</a>
             <p>This code expires in 10 minutes.</p>
             <p>If you didn’t register, you can safely ignore this email. Questions? Reach out at 
                 <a href="mailto:support@focusflow.com" class="contact">support@focusflow.com</a>
