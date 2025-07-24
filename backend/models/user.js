@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt=require("bcryptjs");
+const bcrypt = require("bcryptjs");
 
 const UserSchema = new mongoose.Schema({
   email: {
@@ -15,9 +15,15 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, "Your password is required"],
   },
-}, 
-{ timestamps: true });
-
+  isVerified: {
+    type: Boolean,
+    default: false
+  },
+  otp: { type: String },
+  otpExpiresAt: { type: Date },
+  timestamp: { type: String, default: () => new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) }
+},
+)
 UserSchema.pre("save", async function () {
   this.password = await bcrypt.hash(this.password, 8);
 });

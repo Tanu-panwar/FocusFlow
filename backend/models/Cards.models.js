@@ -1,5 +1,5 @@
 
-const mongoose =require("mongoose");
+const mongoose = require("mongoose");
 const cardSchema = new mongoose.Schema(
   {
     term: {
@@ -38,8 +38,8 @@ const cardSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-  },
-  { timestamps: true }
+    timestamp: { type: String, default: () => new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) }
+  }
 );
 
 // 🔹 Pre-save hook to ensure "general" deck is always included
@@ -58,4 +58,4 @@ cardSchema.pre("save", async function (next) {
 
 const Card = mongoose.model("Card", cardSchema);
 
-module.exports=Card;
+module.exports = Card;

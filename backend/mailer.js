@@ -2,7 +2,7 @@
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
-const transporter = nodemailer.createTransport({
+module.exports.transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
   secure: false,
@@ -12,4 +12,3 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-module.exports = transporter;

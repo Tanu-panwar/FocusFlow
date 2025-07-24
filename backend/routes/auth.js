@@ -1,34 +1,20 @@
 
-const { Signup, Login, Logout } = require('../Controllers/AuthController')
-const { userVerification }=require("../middleware")
+const { Signup, Login, Logout, verfiyEmail, resendOTP, forgetPassword } = require('../Controllers/AuthController')
+const { userVerification } = require("../middleware")
 const router = require('express').Router()
-
-
-// const transporter = require("../mailer");
-
-// router.get("/test-email", async (req, res) => {
-//   try {
-//     await transporter.sendMail({
-//       from: process.env.EMAIL_USER,
-//       to: "suhanachaudhary212@gmail.com",
-//       subject: "Test Email",
-//       text: "This is a test email.",
-//     });
-//     res.send("✅ Email sent");
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).send("❌ Failed to send email");
-//   }
-// });
-
+const { verfiyEmailMiddleware } = require("../verifyEmailMiddleware")
 
 //home page route
-router.get('/',userVerification,(req, res) => {
+router.get('/', userVerification, (req, res) => {
     res.json({ status: true, user: req.user.username });
-});    
+});
 
 router.post('/signup', Signup);
-router.post('/login', Login);
+router.post('/verifyEmail', verfiyEmail);
+router.post('/resend-otp', resendOTP);
+router.post('/login', verfiyEmailMiddleware, Login);
+
+router.post('/forgetPassword', verfiyEmailMiddleware, forgetPassword);
 router.post('/logout', Logout);
 
 module.exports = router

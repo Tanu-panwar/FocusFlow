@@ -1,6 +1,6 @@
 
 const mongoose = require("mongoose");
-const transporter = require("./mailer");
+const { transporter } = require("./mailer");
 const User = require("./models/user");
 require("dotenv").config();
 

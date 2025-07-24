@@ -1,5 +1,5 @@
 
-const mongoose =require("mongoose");
+const mongoose = require("mongoose");
 
 const deckSchema = new mongoose.Schema({
     name: {
@@ -13,9 +13,10 @@ const deckSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true,
-    }
-}, { timestamps: true });
+    },
+    timestamp: { type: String, default: () => new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) }
+})
 
 const Deck = mongoose.model("Deck", deckSchema);
 
-module.exports=Deck;
+module.exports = Deck;

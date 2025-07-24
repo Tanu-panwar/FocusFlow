@@ -22,11 +22,11 @@ const taskSchema = new mongoose.Schema({
     },
     taskDuration: {
         type: Number,
-        default:0,
+        default: 0,
     },
     breakTime: {
         type: Number,
-        default:0,
+        default: 0,
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -37,6 +37,7 @@ const taskSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    timestamp: { type: String, default: () => new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) }
 });
 
 module.exports = mongoose.model("Task", taskSchema);

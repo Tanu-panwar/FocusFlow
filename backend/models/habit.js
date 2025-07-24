@@ -16,9 +16,8 @@ const HabitSchema = new mongoose.Schema({
     favorite: {
         type: Boolean,
         default: false
-    }
-}, {
-    timestamps: true
+    },
+    timestamp: { type: String, default: () => new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) }
 });
 
 const Habit = mongoose.model('Habit', HabitSchema);

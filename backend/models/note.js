@@ -1,5 +1,5 @@
 
-const mongoose =require("mongoose");
+const mongoose = require("mongoose");
 
 const noteSchema = new mongoose.Schema({
   title: {
@@ -26,8 +26,9 @@ const noteSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  timestamp: { type: String, default: () => new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) }
 })
 
 const Note = mongoose.model("Note", noteSchema)
 
-module.exports=Note
+module.exports = Note
