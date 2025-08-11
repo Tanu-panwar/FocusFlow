@@ -50,7 +50,7 @@
 
 ### 🌐 Live Link
 - Access **FocusFlow** directly here:  
-<a href="https://focusflowfrontend.onrender.com/login" target="_blank">Login to FocusFlow</a>
+<a href="https://focusflowfrontend.onrender.com" target="_blank">Login to FocusFlow</a>
 
 
 ## ⚙️ Installation & Setup
