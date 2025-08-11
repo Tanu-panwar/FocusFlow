@@ -66,8 +66,8 @@ Before you start, make sure you have the following installed on your system:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/tanupanwar/focusflow.git
-cd focusflow
+git clone https://github.com/Tanu-panwar/FocusFlow.git
+cd FocusFlow
 ```
 
 ### Backend Setup
